@@ -19,9 +19,8 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
     # Send: N9 M105*46
     # Recv: ok T:21.2/0.0
 
-    temp_report_pattern = re.compile(
-        'Echo:Get Head\(0\) T:(\d+\.\d)/(\d+\.\d)')
-    #fix_template = "ok T:{actual}/{target}"
+    temp_report_pattern = re.compile("Echo:Get Head\(0\) T:(\d+\.\d)/(\d+\.\d)")
+    # fix_template = "ok T:{actual}/{target}"
 
     def check_for_temp_report(self, comm_instance, line, *args, **kwargs):
         if "T:" not in line and "Count X" not in line:
@@ -31,7 +30,7 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
 
         # Fixes M114 displayed on 2 lines
         if "Count X" in line:
-            line = line.replace('\n', ' ')
+            line = line.replace("\n", " ")
 
         # Fixes M105 Temperature Report
         else:
@@ -46,13 +45,11 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
             crealitycr100fix=dict(
                 displayName=self._plugin_name,
                 displayVersion=self._plugin_version,
-
                 type="github_release",
                 current=self._plugin_version,
                 user="raspberrypisig",
                 repo="Octoprint-CrealityCR100FixPlugin",
-
-                pip="https://github.com/raspberrypisig/Octoprint-CrealityCR100FixPlugin/archive/{target_version}.zip"
+                pip="https://github.com/raspberrypisig/Octoprint-CrealityCR100FixPlugin/archive/{target_version}.zip",
             )
         )
 
@@ -66,6 +63,9 @@ def __plugin_load__():
 
     global __plugin_hooks__
     __plugin_hooks__ = {
-        "octoprint.comm.protocol.gcode.received": (__plugin_implementation__.check_for_temp_report, 1),
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
+        "octoprint.comm.protocol.gcode.received": (
+            __plugin_implementation__.check_for_temp_report,
+            1,
+        ),
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
     }
