@@ -24,7 +24,6 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
     #fix_template = "ok T:{actual}/{target}"
 
     def check_for_temp_report(self, comm_instance, line, *args, **kwargs):
-        # Check to see if we received the broken temperature response and if so extract temperature for octoprint
         if "T:" not in line and "Count X" not in line:
             return line
 
@@ -34,6 +33,7 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
         if "Count X" in line:
             line = line.replace('\n', ' ')
 
+        # Fixes M105 Temperature Report
         else:
             m = self.temp_report_pattern.search(line)
             line = f"ok T{m.group(1)}/{m.group(2)}"
