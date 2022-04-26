@@ -1,4 +1,4 @@
-# Fix for Creailty CR-100 Printers in Octoprint
+# Fix for Creality CR-100 Printers in Octoprint
 
 This Octoprint plugin makes the Creality CR-100 printer functional under Octoprint.
 
