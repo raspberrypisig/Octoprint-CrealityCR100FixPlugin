@@ -49,8 +49,8 @@ class CrealityCR100FixPlugin(octoprint.plugin.OctoPrintPlugin):
 
                 type="github_release",
                 current=self._plugin_version,
-                user="SimplyPrint",
-                repo="OctoPrint-CR100TemperatureReportingFix",
+                user="raspberrypisig",
+                repo="Octoprint-CrealityCR100FixPlugin",
 
                 pip="https://github.com/raspberrypisig/Octoprint-CrealityCR100FixPlugin/archive/{target_version}.zip"
             )
